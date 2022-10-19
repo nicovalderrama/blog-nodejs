@@ -37,9 +37,16 @@
                     <% } %>
 
                     <main class="bg-white col-12">
-                        <form action="/new" method="POST" enctype="multipart/form-data">
-                            <%- include('./articles/_form.ejs') %>
-                        </form>
+                        <div class="card mb-5">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img src="<%= article.imageURL %>" class="card-img-top" alt="..." style="width: 600px;">
+                                </div>
+                                <h1 class="card-title mt-3 text-center text-dark"><%= article.title %></h1>
+                                <p class="card-text text-center"><%= article.description %></p>
+                                <p class="card-text text-bold"><small class="text-muted"><span>Fecha de publicacion: </span><%= article.createdAt.toLocaleString() %></small></p>
+                            </div>
+                        </div>
                     </main>
                 </div>
         </div>

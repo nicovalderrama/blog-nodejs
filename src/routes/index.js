@@ -23,10 +23,6 @@ router.post('/logout', function(req, res, next){
     });
 });
 
-router.get('/profile',isAuthenticated, (req, res,next )=>{
-    res.render('profile')
-});
-
 function isAuthenticated(req, res, next){
     if(req.isAuthenticated()){
         return next();
