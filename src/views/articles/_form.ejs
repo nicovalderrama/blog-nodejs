@@ -1,0 +1,25 @@
+<div class="mb-3">
+    <label for="title" class="form-label">Titulo</label>
+    <input required type="text" name="title" class="form-control" id="title" value="<%= article.title%> ">
+</div>
+<div class="mb-3">
+    <label for="description" class="form-label">Descripción</label>
+    <textarea class="form-control" name="description" id="description" rows="3"><%= article.description%> </textarea>
+</div>
+<div class="mb-3">
+    <label for="markdown" class="form-label">Resumen</label>
+    <textarea required class="form-control" name="markdown" id="markdown" rows="3"><%= article.markdown%></textarea>
+</div>
+<div class="input-group">
+    <div class="custom-file">
+        <input type="file" name="image" class="custom-file-input" id="inputGroupFile01">
+        <label class="custom-file-label" for="inputGroupFile01">Elegir imagen</label>
+    </div>
+</div>
+<br>
+<a href="/" class="btn btn-danger">
+    Cancelar
+</a>
+<button type="submit" class="btn btn-success">
+    Guardar
+</button>

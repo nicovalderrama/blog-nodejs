@@ -1,0 +1,44 @@
+<div class="modal fade" id="modal-login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-end">
+                <button data-bs-dismiss="modal" class="bg-white border-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                    </svg>
+                </button>
+            </div>
+                <div class="p-0 modal-body">
+                    <div class="p-0 d-flex col-12">
+                        <div class="p-0 bg-white main-reg col-12">
+                            <div class="signup-form">
+                                <form  action="/login" method="post" class="mb-0">
+                                    <h2>Ingresar</h2>
+                                    <p class="hint-text">Bienvenido, ingresa tus credenciales de acceso</p>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="email" placeholder="Email"
+                                            required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="password" placeholder="Contraseña"
+                                            required="required">
+                                    </div>
+                                    <% if(signinMessage.lenght > 0){ %>
+                                        <div class="alert">
+                                            <p><%= signinMessage %></p>
+                                        </div>
+                                    <% } %>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-secondary btn-lg btn-block">Ingresar</button>
+                                        </div>
+                                        <div class="text-center">Aún no tenés una cuenta?
+                                            <a href="#" id="ingresar">Registrarse</a>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
