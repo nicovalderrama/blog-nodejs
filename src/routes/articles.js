@@ -58,9 +58,12 @@ router.post("/new",isAuthenticated, async (req, res) => {
 
 // Obtenemos el Articulo con Slug aplicado
 router.get("/:slug", async (req, res) => {
+  const articles = await Article.find().sort({
+    slug: "asc",
+  });
   const article = await Article.findOne({ slug: req.params.slug });
   if (article == null) res.redirect("/");
-  res.render("show", { article: article });
+  res.render("show", { article: article, articles: articles });
 });
 
 // Ruta para renderizar el Articulo a Editar
