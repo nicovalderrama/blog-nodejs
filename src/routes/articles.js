@@ -21,12 +21,12 @@ router.get('/', async(req, res)=>{
 })
 
 // ruta para renderizar el formulario de creacion de articulos
-router.get("/new", (req, res) => {
+router.get("/new",isAuthenticated, (req, res) => {
   res.render("new", { article: new Article() });
 });
 
 // ruta para postear los articulos
-router.post("/new", async (req, res) => {
+router.post("/new",isAuthenticated, async (req, res) => {
   console.log(req.file);
   const options = {
     folder: "blog",
@@ -64,13 +64,13 @@ router.get("/:slug", async (req, res) => {
 });
 
 // Ruta para renderizar el Articulo a Editar
-router.get("/edit/:id", async (req, res, next) => {
+router.get("/edit/:id",isAuthenticated, async (req, res, next) => {
   const article = await Article.findById(req.params.id);
   res.render("edit", { article: article });
 });
 
 // Ruta para Editar el Articulo
-router.put("/edit/:id", async (req, res) => {
+router.put("/edit/:id",isAuthenticated, async (req, res) => {
   req.article = await Article.findById(req.params.id);
   let article = req.article;
   article.title = req.body.title;
@@ -100,9 +100,16 @@ router.put("/edit/:id", async (req, res) => {
 });
 
   // Eliminar Articulo x ID
-  router.delete('/:id', async(req, res)=>{
+  router.delete('/:id',isAuthenticated, async(req, res)=>{
     await Article.findByIdAndDelete(req.params.id)
     res.redirect('/')
   })
+
+  function isAuthenticated(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/');
+}
 
 module.exports = router;

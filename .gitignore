@@ -1,5 +1,2 @@
 .env
 node_modules
-.postcss.config.js
-public
-tailwind.config.js

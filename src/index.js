@@ -5,11 +5,10 @@ const articleRouter = require('./routes/articles')
 const methodOverride = require('method-override')
 const morgan = require('morgan')
 const passport = require('passport')
-const session = require('cookie-session')
+const session = require('express-session')
 const flash = require('connect-flash')
 const multer = require('multer');
 const path = require('path');
-const { Cookie } = require('express-session')
 
 //inicializaciones
 const app = express()
@@ -29,8 +28,6 @@ app.use(session({
     secret: 'mysecretapp',
     resave: false,
     saveUninitialized: false,
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-    Cookie: { secure: true }
 }))
 app.use(flash())
 app.use(passport.initialize())
