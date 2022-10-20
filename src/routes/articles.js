@@ -97,6 +97,9 @@ router.put("/edit/:id",upload.single('image'), async (req, res) => {
 
   // Eliminar Articulo x ID
   router.delete('/:id',isAuthenticated, async(req, res)=>{
+    //eliminar imagen de cloudinary
+    let article = await Article.findById(req.params.id);
+    await cloudinary.uploader.destroy(article.public_id);
     await Article.findByIdAndDelete(req.params.id)
     res.redirect('/')
   })
