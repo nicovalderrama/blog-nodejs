@@ -2,13 +2,8 @@ const express = require("express");
 const Article = require("../models/article");
 const router = express.Router();
 require('dotenv').config();
-
-const cloudinary = require("cloudinary").v2;
-cloudinary.config({ 
-  cloud_name: process.env.CLOUDN_NAME, 
-  api_key: process.env.CLOUDN_API_KEY, 
-  api_secret: process.env.CLOUDN_API_SECRET
-});
+const cloudinary = require('../utils/cloudinary');
+const upload = require('../utils/multer');
 
 const fs = require("fs");
 
@@ -26,7 +21,7 @@ router.get("/new",isAuthenticated, (req, res) => {
 });
 
 // ruta para postear los articulos
-router.post("/new",isAuthenticated, async (req, res) => {
+router.post("/new",upload.single('image'), async (req, res) => {
   console.log(req.file);
   const options = {
     folder: "blog",
@@ -38,21 +33,19 @@ router.post("/new",isAuthenticated, async (req, res) => {
     const result = await cloudinary.uploader.upload(req.file.path, options);
     fs.unlinkSync(req.file.path);
     console.log(result);
-    req.body.image = result.secure_url;
-    req.body.imageId = result.public_id;
+
+    const newArticle = new Article({
+      title: req.body.title,
+      description: req.body.description,
+      markdown: req.body.markdown,
+      imageURL: result.secure_url,
+      public_id: result.public_id,
+    })
+    await newArticle.save();
+    res.redirect('/');
   } catch (error) {
     console.log(error);
   }
-
-  const newArticle = new Article({
-    title: req.body.title,
-    description: req.body.description,
-    markdown: req.body.markdown,
-    imageURL: req.body.image,
-    public_id: req.body.imageId,
-  })
-  await newArticle.save();
-  res.redirect('/');
 });
 
 
@@ -73,7 +66,7 @@ router.get("/edit/:id",isAuthenticated, async (req, res, next) => {
 });
 
 // Ruta para Editar el Articulo
-router.put("/edit/:id",isAuthenticated, async (req, res) => {
+router.put("/edit/:id",upload.single('image'), async (req, res) => {
   req.article = await Article.findById(req.params.id);
   let article = req.article;
   article.title = req.body.title;

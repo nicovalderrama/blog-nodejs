@@ -1,14 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const Article = require('./models/article')
-const articleRouter = require('./routes/articles')
 const methodOverride = require('method-override')
 const morgan = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
 const flash = require('connect-flash')
-const multer = require('multer');
-const path = require('path');
 
 //inicializaciones
 const app = express()
@@ -39,15 +35,6 @@ app.use((req, res, next) => {
     app.locals.isAuthenticated = req.isAuthenticated()
     next()
 });
-const storage = multer.diskStorage({
-    destination: path.join(__dirname, 'public/uploads'),
-    filename: (req, file, cb, filename) => {
-        cb(null, new Date().getTime() + path.extname(file.originalname));
-    }
-}) 
-app.use(multer({storage}).single('image'));
-
-
 app.use(require('./routes/articles'));
 
 app.use('/public/', express.static('./public/'))
