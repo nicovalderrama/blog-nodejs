@@ -7,6 +7,18 @@
     <textarea class="form-control" name="description" id="description" rows="3"><%= article.description%> </textarea>
 </div>
 <div class="mb-3">
+    <div class="mb-3">
+        <p>Utiliza estos botones para armar la descripcion del post</p>
+        <button id="p" class="btn btn-secondary   pt-0 pb-0">p</button>
+        <button id="h1" class="btn btn-secondary  pt-0 pb-0">h1</button>
+        <button id="h2" class="btn btn-secondary  pt-0 pb-0">h2</button>
+        <button id="ol" class="btn btn-secondary  pt-0 pb-0">ol</button>
+        <button id="ul" class="btn btn-secondary pt-0 pb-0">ul</button>
+        <button id="li" class="btn btn-secondary  pt-0 pb-0">li</button>
+        <button id="a" class="btn btn-secondary  pt-0 pb-0">a</button>
+        <button id="img" class="btn btn-secondary  pt-0 pb-0">img</button>
+        <button id="b" class="btn btn-secondary  pt-0 pb-0">b</button>
+    </div>
     <label for="markdown" class="form-label">Descripción</label>
     <textarea required class="form-control" name="markdown" id="markdown" rows="3"><%= article.markdown%></textarea>
 </div>
@@ -23,3 +35,73 @@
 <button type="submit" class="btn btn-success">
     Guardar
 </button>
+
+<script>
+const h1boton = document.getElementById('h1');
+const h2boton = document.getElementById('h2');
+const olboton = document.getElementById('ol');
+const ulboton = document.getElementById('ul');
+const liBoton = document.getElementById('li');
+const pBoton = document.getElementById('p');
+const aBoton = document.getElementById('a');
+const imgBoton = document.getElementById('img');
+const boldBoton = document.getElementById('b');
+const textarea = document.getElementById('markdown');
+
+h1boton.addEventListener('click', (e) => {
+    e.preventDefault();
+    textarea.value += `<h1>Titulo</h1>`;
+});
+
+h2boton.addEventListener('click', (e) => {
+    e.preventDefault();
+    textarea.value += `<h2>Titulo</h2>`;
+});
+
+olboton.addEventListener('click', (e) => {
+    e.preventDefault();
+    textarea.value +=
+    `<ol>
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+    <li>item 4</li>
+    </ol>`;
+});
+
+ulboton.addEventListener('click', (e) => {
+    e.preventDefault();
+    textarea.value +=
+    `<ul>
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+    <li>item 4</li>
+    </ul>`;
+});
+
+liBoton.addEventListener('click', (e) => {
+    e.preventDefault();
+    textarea.value += `<li>item</li>`;
+});
+
+pBoton.addEventListener('click', (e) => {
+    e.preventDefault();
+    textarea.value += `<p>Parrafo</p>`;
+});
+
+aBoton.addEventListener('click', (e) => {
+    e.preventDefault();
+    textarea.value += `<a href="#" target=”_blank”>link</a>`;
+});
+
+imgBoton.addEventListener('click', (e) => {
+    e.preventDefault();
+    textarea.value += `<img src="" alt="">`;
+});
+
+boldBoton.addEventListener('click', (e) => {
+    e.preventDefault();
+    textarea.value += `<b>texto</b>`;
+});
+</script>
